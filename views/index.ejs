@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <script src="https://cdn.tailwindcss.com"></script>
+     <style>
+        body {
+            background: radial-gradient(circle at 60% 40%, #ff80ab 0%, #8e44ad 40%, #22223b 100%);
+            min-height: 100vh;
+        }
+        .chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, minmax(0, 1fr));
+            grid-template-rows: repeat(8, minmax(0, 1fr));
+            width: 420px;
+            height: 420px;
+            border-radius: 1.5rem;
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.37), 0 0 0 8px #fff3 inset;
+            border: 6px solid #fff;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            overflow: hidden;
+            margin: 0 auto;
+            transform: rotate(0deg);
+        }
+
+        .piece.white {
+            color: #fff;
+            filter: drop-shadow(0 0 6px #222);
+            text-shadow: 0 2px 12px #000a;
+        }
+
+        .piece.black {
+            color: #222;
+            filter: drop-shadow(0 0 4px #fff);
+            text-shadow: 0 2px 12px #fff8;
+        }
+
+        .flipped {
+            transform: rotate(180deg);
+        }
+
+        .square {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .square.light {
+            background: linear-gradient(135deg, #ffe082 60%, #fffde7 100%);
+            transition: background 0.2s;
+        }
+
+        .square.dark {
+            background: linear-gradient(135deg, #7c3aed 60%, #4f046e 100%);
+            transition: background 0.2s;
+        }
+
+        .square:hover {
+            box-shadow: 0 0 0 4px #ff80abcc inset;
+            z-index: 1;
+        }
+
+        .piece {
+            font-size: 2.7rem;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.1s;
+        }
+
+        .piece:active {
+            transform: scale(1.12);
+        }
+
+        /* Rotate pieces for black player */
+        .flipped .piece {
+            transform: rotate(180deg);
+        }
+        /* Multiplayer badge */
+        .multiplayer-badge {
+            background: linear-gradient(90deg, #ff80ab 0%, #7c3aed 100%);
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            border-radius: 9999px;
+            padding: 0.25rem 1.25rem;
+            box-shadow: 0 2px 12px #ff80ab44;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            display: inline-block;
+        }
+        /* Info bar */
+        #game-status {
+            background: linear-gradient(90deg, #7c3aed 0%, #ff80ab 100%);
+            border-radius: 0.75rem;
+            padding: 0.5rem 1.5rem;
+            color: #fff;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            min-width: 220px;
+            text-align: center;
+            box-shadow: 0 2px 8px #7c3aed33;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700 flex flex-col">
+    <header class="w-full py-8 flex flex-col items-center">
+        <span class="multiplayer-badge">MULTIPLAYER ONLINE</span>
+        <h1 class="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg tracking-wide mb-2">♛ Chess Arena</h1>
+        <h2 class="text-2xl md:text-3xl text-pink-200 font-semibold mb-2">Play with friends in real-time!</h2>
+        <p class="text-lg text-indigo-100">Invite, compete, and become the Chess Arena Champion.</p>
+    </header>
+    <main class="flex-1 flex flex-col items-center justify-center">
+        <div class="bg-white/20 rounded-3xl shadow-2xl p-8 flex flex-col items-center backdrop-blur-md border-2 border-white/30">
+            <div class="chessboard mb-4"></div>
+            <div id="game-status" class="mt-2"></div>
+        </div>
+    </main>
+    <footer class="w-full py-4 text-center text-indigo-100 text-base tracking-wide bg-gradient-to-r from-indigo-900 via-purple-800 to-pink-700">
+        &copy; <%= new Date().getFullYear() %> Chess Arena |Made with ❤️ by <a href="https://github.com/ankitsharma495">Ankit Sharma</a>
+    </footer>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/chessgame.js"></script>
+</body>
+</html>
