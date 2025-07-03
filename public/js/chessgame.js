@@ -92,6 +92,8 @@ const getPieceUnicode = (piece) => {
     return pieceUnicode[piece.type]?.[piece.color] || '';
 };
 
+socket.emit("joinRoom");
+
 socket.on("playerRole", (role) => {
     playerRole = role;
     renderBoard();
@@ -113,7 +115,25 @@ socket.on("move", (move) => {
     renderBoard();
 });
 
-document.addEventListener("DOMContentLoaded", renderBoard);
+socket.on("playerJoined", (msg) => {
+    alert(msg);
+});
 
-const roomId = "someRoomId"; // Replace with the actual room ID
-socket.emit("joinRoom", roomId);
+socket.on("spectatorJoined", (msg) => {
+    alert(msg);
+});
+
+function showRoomList() {
+    socket.emit("getRooms");
+}
+
+socket.on("roomList", (rooms) => {
+    if (rooms.length === 0) {
+        alert("No active games right now.");
+        return;
+    }
+    const roomId = prompt("Active rooms:\n" + rooms.join("\n") + "\n\nEnter a Room ID to spectate:");
+    if (roomId && rooms.includes(roomId)) {
+        socket.emit("spectateRoom", roomId);
+    }
+});
