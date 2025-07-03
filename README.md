@@ -13,7 +13,16 @@ Play chess with friends online, see live moves, and enjoy a beautiful UI!
 
 ---
 
+### Demo 
+
+![](assets/chessgif.gif)
+
+---
+
+
 ### Screenshots
+
+
 
 | Game Board                        
 |------------------------------------
