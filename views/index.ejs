@@ -23,6 +23,19 @@
             overflow: hidden;
             margin: 0 auto;
             transform: rotate(0deg);
+            transition: width 0.2s, height 0.2s;
+        }
+
+        /* Responsive chessboard */
+        @media (max-width: 600px) {
+            .chessboard {
+                width: 95vw;
+                height: 95vw;
+                min-width: 240px;
+                min-height: 240px;
+                max-width: 98vw;
+                max-height: 98vw;
+            }
         }
 
         .piece.white {
@@ -70,6 +83,12 @@
             transition: transform 0.1s;
         }
 
+        @media (max-width: 600px) {
+            .piece {
+                font-size: 2rem;
+            }
+        }
+
         .piece:active {
             transform: scale(1.12);
         }
@@ -104,20 +123,31 @@
             text-align: center;
             box-shadow: 0 2px 8px #7c3aed33;
         }
-    </style>
+
+        /* Responsive padding and font for main container */
+        @media (max-width: 600px) {
+            .main-container {
+                padding: 0.5rem !important;
+            }
+            #game-status {
+                font-size: 1rem;
+                padding: 0.4rem 0.7rem;
+            }
+        }
+     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700 flex flex-col">
     <header class="w-full py-8 flex flex-col items-center">
         <span class="multiplayer-badge">MULTIPLAYER ONLINE</span>
-        <h1 class="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg tracking-wide mb-2">♛ Chess Arena</h1>
-        <h2 class="text-2xl md:text-3xl text-pink-200 font-semibold mb-2">Play with friends in real-time!</h2>
-        <p class="text-lg text-indigo-100">Invite, compete, and become the Chess Arena Champion.</p>
+        <h1 class="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg tracking-wide mb-2 text-center">♛ Chess Arena</h1>
+        <h2 class="text-2xl md:text-3xl text-pink-200 font-semibold mb-2 text-center">Play with friends in real-time!</h2>
+        <p class="text-lg text-indigo-100 text-center">Invite, compete, and become the Chess Arena Champion.</p>
     </header>
     <main class="flex-1 flex flex-col items-center justify-center">
-        <div class="bg-white/20 rounded-3xl shadow-2xl p-8 flex flex-col items-center backdrop-blur-md border-2 border-white/30">
+        <div class="main-container bg-white/20 rounded-3xl shadow-2xl p-8 flex flex-col items-center backdrop-blur-md border-2 border-white/30 w-full max-w-lg sm:max-w-xl">
             <div class="chessboard mb-4"></div>
             <div id="game-status" class="mt-2"></div>
-            <button onclick="showRoomList()" class="mt-4 px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold shadow-md hover:from-pink-600 hover:to-purple-700 transition-all duration-300 ease-in-out">
+            <button onclick="showRoomList()" class="mt-4 px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold shadow-md hover:from-pink-600 hover:to-purple-700 transition-all duration-300 ease-in-out w-full sm:w-auto text-base sm:text-lg">
                 Spectate a Room
             </button>
         </div>
